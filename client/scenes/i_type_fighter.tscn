@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cyl30fo8vec0m"]
+
+[ext_resource type="Script" path="res://scripts/i_type_fighter.gd" id="1_se5xw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_45h8r"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_87jp5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02ed5"]
+albedo_color = Color(0.529412, 0.301961, 1, 1)
+
+[node name="ITypeFighter" type="CharacterBody3D" groups=["enemy"]]
+script = ExtResource("1_se5xw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_45h8r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.5, 0, -1, -2.18557e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_87jp5")
+surface_material_override/0 = SubResource("StandardMaterial3D_02ed5")
