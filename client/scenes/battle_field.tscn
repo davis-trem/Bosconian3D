@@ -13,8 +13,6 @@ sky_material = SubResource("ProceduralSkyMaterial_vil3s")
 background_mode = 2
 sky = SubResource("Sky_08knd")
 
-[sub_resource type="PrismMesh" id="PrismMesh_y6fkt"]
-
 [sub_resource type="ViewportTexture" id="ViewportTexture_rfeow"]
 viewport_path = NodePath("TopDownMirrors/BottomMirror/SubViewport")
 
@@ -27,6 +25,9 @@ viewport_path = NodePath("TopDownMirrors/LeftMirror/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_vaxcs"]
 viewport_path = NodePath("TopDownMirrors/RightMirror/SubViewport")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_emdh6"]
+size = Vector3(64, 50, 112)
+
 [node name="BattleField" type="Node3D"]
 script = ExtResource("1_ppidl")
 
@@ -38,11 +39,6 @@ texture = ExtResource("2_ero2m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny3cu")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-3, -2.62268e-07, 1.14641e-14, 0, -1.31134e-07, -3, 2.62268e-07, -3, 1.31134e-07, -21.1823, 0, -49.9099)
-mesh = SubResource("PrismMesh_y6fkt")
-skeleton = NodePath("../TopDownMirrors/RightMirror")
 
 [node name="TopDownMirrors" type="Node3D" parent="."]
 
@@ -101,3 +97,10 @@ transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, -40, -3, 0)
 flip_v = true
 axis = 1
 texture = SubResource("ViewportTexture_vaxcs")
+
+[node name="BorderArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BorderArea"]
+shape = SubResource("BoxShape3D_emdh6")
+
+[connection signal="body_exited" from="BorderArea" to="." method="_on_border_area_body_exited"]
