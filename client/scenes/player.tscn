@@ -8,6 +8,7 @@ points = PackedVector3Array(0, 0.5, -1, 1, 0.5, 1, -1, 0.5, 1, 0, -0.5, -1, 1, -
 [sub_resource type="PrismMesh" id="PrismMesh_ufqxy"]
 
 [node name="Player" type="StaticBody3D" groups=["player"]]
+collision_mask = 6
 script = ExtResource("1_dr5rk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
