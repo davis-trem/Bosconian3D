@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/battle_field.gd" id="1_ppidl"]
 [ext_resource type="Texture2D" uid="uid://crxuq6nlbjkut" path="res://images/space.jpg" id="2_ero2m"]
 [ext_resource type="PackedScene" uid="uid://b0848qla8civx" path="res://scenes/player.tscn" id="2_l8kc8"]
-[ext_resource type="PackedScene" uid="uid://6cxmgd2k3kf1" path="res://scenes/p_type_fighter.tscn" id="3_hoavg"]
+[ext_resource type="PackedScene" uid="uid://dfeb48jdhn3uu" path="res://scenes/spy_ship.tscn" id="3_ncsei"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vil3s"]
 
@@ -34,8 +34,8 @@ script = ExtResource("1_ppidl")
 
 [node name="Player" parent="." instance=ExtResource("2_l8kc8")]
 
-[node name="PTypeFighter" parent="." instance=ExtResource("3_hoavg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0768, 0, -7.37167)
+[node name="SpyShip" parent="." instance=ExtResource("3_ncsei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25144, 0, -8.99343)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-2.56586e-07, 5.348, -4.38862e-08, 0, -2.33769e-07, -1.004, -5.87, -2.33769e-07, 1.91833e-15, 0, -3, 0)
