@@ -1,19 +1,20 @@
-extends StaticBody3D
+extends CharacterBody3D
+
+var explosion_scene = preload('res://scenes/explosion.tscn')
 
 
 @onready var _collision_shape = $CollisionShape3D
 @onready var _top_down_camera = $TopDownCamera3D
 @onready var _cockpit_camera = $CockpitCamera3D
 
-@export var speed = 9
+signal has_died(position: Vector3)
 
+var speed = 9
 var move_direction = Vector3(0, 0, -1)
-var velocity = Vector3(0, 0, move_direction.z * speed)
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	velocity = Vector3(0, 0, move_direction.z * speed)
 
 
 func _input(event):
@@ -34,7 +35,9 @@ func _physics_process(delta):
 	elif _top_down_camera.current:
 		handle_top_down_movement()
 	
-	move_and_collide(velocity * delta)
+	var collision := move_and_collide(velocity * delta)
+	if collision:
+		die()
 
 
 func handle_top_down_movement():
@@ -66,3 +69,11 @@ func handle_cockpit_movement():
 	else:
 		rotation.z = Vector3(0, 0, rotation.z).move_toward(Vector3(0, 0, 0), 0.02).z
 
+
+func die():
+	emit_signal('has_died', global_position)
+	var explosion := explosion_scene.instantiate()
+	get_tree().current_scene.add_child(explosion)
+	explosion.global_position = global_position
+	explosion.emitting = true
+	queue_free()

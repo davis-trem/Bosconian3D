@@ -5,12 +5,7 @@ const Util = preload('res://scripts/util.gd')
 
 @onready var border_area = $BorderArea
 @onready var border_area_shape = $BorderArea/CollisionShape3D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	print('working....')
-	pass # Replace with function body.
+@onready var spectador_camera = $SpectadorCamera
 
 
 func _physics_process(delta):
@@ -24,3 +19,8 @@ func _on_border_area_body_exited(body: Node3D):
 		body.global_position.x = -body.global_position.x
 	if Util.FIELD_HEIGHT <= abs(body.global_position.z):
 		body.global_position.z = -body.global_position.z
+
+
+func _on_player_has_died(position):
+	spectador_camera.global_position = position
+	spectador_camera.current = true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/battle_field.gd" id="1_ppidl"]
 [ext_resource type="Texture2D" uid="uid://crxuq6nlbjkut" path="res://images/space.jpg" id="2_ero2m"]
 [ext_resource type="PackedScene" uid="uid://b0848qla8civx" path="res://scenes/player.tscn" id="2_l8kc8"]
-[ext_resource type="PackedScene" uid="uid://dfeb48jdhn3uu" path="res://scenes/spy_ship.tscn" id="3_ncsei"]
+[ext_resource type="PackedScene" uid="uid://cyl30fo8vec0m" path="res://scenes/i_type_fighter.tscn" id="2_yhwv4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vil3s"]
 
@@ -34,8 +34,8 @@ script = ExtResource("1_ppidl")
 
 [node name="Player" parent="." instance=ExtResource("2_l8kc8")]
 
-[node name="SpyShip" parent="." instance=ExtResource("3_ncsei")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25144, 0, -8.99343)
+[node name="ITypeFighter" parent="." instance=ExtResource("2_yhwv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0992, 0, -2.61694)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(-2.56586e-07, 5.348, -4.38862e-08, 0, -2.33769e-07, -1.004, -5.87, -2.33769e-07, 1.91833e-15, 0, -3, 0)
@@ -108,4 +108,10 @@ texture = SubResource("ViewportTexture_vaxcs")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BorderArea"]
 shape = SubResource("BoxShape3D_emdh6")
 
+[node name="SpectadorCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.575, 0)
+projection = 1
+size = 16.0
+
+[connection signal="has_died" from="Player" to="." method="_on_player_has_died"]
 [connection signal="body_exited" from="BorderArea" to="." method="_on_border_area_body_exited"]

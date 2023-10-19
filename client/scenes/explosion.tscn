@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxxfvyl5r25w5"]
+
+[ext_resource type="Material" uid="uid://dyjt7ovq66kg2" path="res://material/explosion.tres" id="1_er47o"]
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="1_jhkkh"]
+[ext_resource type="SphereMesh" uid="uid://brfr5ke57xdgp" path="res://material/explosion_mesh.tres" id="2_5u1g2"]
+
+[node name="Explosion" type="GPUParticles3D"]
+emitting = false
+amount = 50
+lifetime = 1.24
+one_shot = true
+speed_scale = 4.5
+explosiveness = 1.0
+visibility_aabb = AABB(-1, -1, -1, 2, 2, 2)
+process_material = ExtResource("1_er47o")
+draw_pass_1 = ExtResource("2_5u1g2")
+script = ExtResource("1_jhkkh")

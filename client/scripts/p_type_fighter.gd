@@ -20,6 +20,8 @@ func _physics_process(delta):
 		self,
 		get_tree().get_nodes_in_group('player')
 	)
+	if closest_player == null:
+		return
 	var player_pos = Util.get_closest_position(self, closest_player)
 	
 	if global_position.distance_to(player_pos) <= radius:

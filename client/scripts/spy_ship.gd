@@ -24,6 +24,8 @@ func _physics_process(delta):
 		self,
 		get_tree().get_nodes_in_group('player')
 	)
+	if closest_player == null:
+		return
 	var player_pos = Util.get_closest_position(self, closest_player)
 	
 	look_at(player_pos)
