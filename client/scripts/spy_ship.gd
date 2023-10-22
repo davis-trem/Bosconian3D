@@ -58,3 +58,8 @@ func _on_retreat_timer_timeout():
 		state = PURSUE
 		speed = 7
 		should_red_alert = true
+
+
+func die():
+	Util.explode(self)
+	queue_free()

@@ -1,11 +1,14 @@
 extends CharacterBody3D
 
-var explosion_scene = preload('res://scenes/explosion.tscn')
+const bullet_scene = preload('res://scenes/bullet.tscn')
+const Util = preload('res://scripts/util.gd')
 
 
 @onready var _collision_shape = $CollisionShape3D
 @onready var _top_down_camera = $TopDownCamera3D
 @onready var _cockpit_camera = $CockpitCamera3D
+@onready var _front_projectile = $CollisionShape3D/FrontProjectile
+@onready var _back_projectile = $CollisionShape3D/BackProjectile
 
 signal has_died(position: Vector3)
 
@@ -27,6 +30,17 @@ func _input(event):
 			rotation.y = _collision_shape.rotation.y
 			_collision_shape.rotation.y = 0
 			_cockpit_camera.current = true
+	
+	if event.is_action_pressed('ui_accept'):
+		var front_bullet = bullet_scene.instantiate()
+		front_bullet.fired_by_player = true
+		front_bullet.global_transform = _front_projectile.global_transform
+		var back_bullet = bullet_scene.instantiate()
+		back_bullet.fired_by_player = true
+		back_bullet.global_transform = _back_projectile.global_transform
+		get_tree().current_scene.add_child(front_bullet)
+		get_tree().current_scene.add_child(back_bullet)
+		
 
 
 func _physics_process(delta):
@@ -72,8 +86,5 @@ func handle_cockpit_movement():
 
 func die():
 	emit_signal('has_died', global_position)
-	var explosion := explosion_scene.instantiate()
-	get_tree().current_scene.add_child(explosion)
-	explosion.global_position = global_position
-	explosion.emitting = true
+	Util.explode(self)
 	queue_free()

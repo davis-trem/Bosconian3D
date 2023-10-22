@@ -26,3 +26,8 @@ func _physics_process(delta):
 	velocity.z = direction.x * speed
 	
 	move_and_collide(velocity * delta)
+
+
+func die():
+	Util.explode(self)
+	queue_free()

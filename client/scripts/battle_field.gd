@@ -21,6 +21,13 @@ func _on_border_area_body_exited(body: Node3D):
 		body.global_position.z = -body.global_position.z
 
 
+func _on_border_area_area_exited(area):
+	if Util.FIELD_WIDTH <= abs(area.global_position.x):
+		area.global_position.x = -area.global_position.x
+	if Util.FIELD_HEIGHT <= abs(area.global_position.z):
+		area.global_position.z = -area.global_position.z
+
+
 func _on_player_has_died(position):
 	spectador_camera.global_position = position
 	spectador_camera.current = true

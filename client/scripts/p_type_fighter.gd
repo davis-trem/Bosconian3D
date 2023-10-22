@@ -78,3 +78,8 @@ func _get_circle_position(target: Vector3) -> Vector3:
 		0,
 		circle_center.z + sin(angle) * 0.5
 	)
+
+
+func die():
+	Util.explode(self)
+	queue_free()

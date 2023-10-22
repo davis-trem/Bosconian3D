@@ -1,5 +1,7 @@
 extends Node
 
+const explosion_scene = preload('res://scenes/explosion.tscn')
+
 const FIELD_HEIGHT = 56
 const FIELD_WIDTH = 32
 
@@ -35,3 +37,10 @@ static func get_closest_node(node: Node3D, targets: Array[Node]):
 				)
 				else closest)
 	)
+
+
+static func explode(node: Node3D):
+	var explosion := explosion_scene.instantiate()
+	node.get_tree().current_scene.add_child(explosion)
+	explosion.global_position = node.global_position
+	explosion.emitting = true
