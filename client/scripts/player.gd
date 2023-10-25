@@ -11,6 +11,7 @@ const Util = preload('res://scripts/util.gd')
 @onready var _back_projectile = $CollisionShape3D/BackProjectile
 
 signal has_died(position: Vector3)
+signal camera_toggle(is_top_down: bool)
 
 var speed = 9
 var move_direction = Vector3(0, 0, -1)
@@ -26,10 +27,12 @@ func _input(event):
 			_collision_shape.rotation.y = rotation.y
 			rotation.y = 0
 			_top_down_camera.current = true
+			camera_toggle.emit(true)
 		elif _top_down_camera.current:
 			rotation.y = _collision_shape.rotation.y
 			_collision_shape.rotation.y = 0
 			_cockpit_camera.current = true
+			camera_toggle.emit(false)
 	
 	if event.is_action_pressed('ui_accept'):
 		var front_bullet = bullet_scene.instantiate()
@@ -85,6 +88,6 @@ func handle_cockpit_movement():
 
 
 func die():
-	emit_signal('has_died', global_position)
+	has_died.emit(global_position)
 	Util.explode(self)
 	queue_free()

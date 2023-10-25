@@ -1,18 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr2sa3eocr5qo"]
+[gd_scene load_steps=16 format=3 uid="uid://cr2sa3eocr5qo"]
 
 [ext_resource type="Script" path="res://scripts/battle_field.gd" id="1_ppidl"]
-[ext_resource type="Texture2D" uid="uid://crxuq6nlbjkut" path="res://images/space.jpg" id="2_ero2m"]
 [ext_resource type="PackedScene" uid="uid://b0848qla8civx" path="res://scenes/player.tscn" id="2_l8kc8"]
-[ext_resource type="PackedScene" uid="uid://cyl30fo8vec0m" path="res://scenes/i_type_fighter.tscn" id="2_yhwv4"]
+[ext_resource type="Texture2D" uid="uid://1433wc4llul3" path="res://sky_boxes/space_skybox_01.png" id="4_8hhva"]
+[ext_resource type="Texture2D" uid="uid://cvjq1e61egvjn" path="res://sky_boxes/space_skybox_02.png" id="5_5w63l"]
+[ext_resource type="Texture2D" uid="uid://bvkwlvy86lm8h" path="res://sky_boxes/space_skybox_03.png" id="6_ywnfq"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vil3s"]
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_odaph"]
+frames = 3
+frame_0/texture = ExtResource("4_8hhva")
+frame_1/texture = ExtResource("5_5w63l")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("6_ywnfq")
+frame_2/duration = 1.0
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aco4a"]
+panorama = SubResource("AnimatedTexture_odaph")
 
 [sub_resource type="Sky" id="Sky_08knd"]
-sky_material = SubResource("ProceduralSkyMaterial_vil3s")
+sky_material = SubResource("PanoramaSkyMaterial_aco4a")
 
 [sub_resource type="Environment" id="Environment_ny3cu"]
 background_mode = 2
 sky = SubResource("Sky_08knd")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_rfeow"]
 viewport_path = NodePath("TopDownMirrors/TopMirror/SubViewport")
@@ -26,6 +38,23 @@ viewport_path = NodePath("TopDownMirrors/LeftMirror/SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_vaxcs"]
 viewport_path = NodePath("TopDownMirrors/RightMirror/SubViewport")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_qie0s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8hhva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5w63l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ywnfq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_emdh6"]
 size = Vector3(64, 50, 112)
 
@@ -33,13 +62,6 @@ size = Vector3(64, 50, 112)
 script = ExtResource("1_ppidl")
 
 [node name="Player" parent="." instance=ExtResource("2_l8kc8")]
-
-[node name="ITypeFighter" parent="." instance=ExtResource("2_yhwv4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.26206, 0, -2.28218)
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(-2.56586e-07, 5.348, -4.38862e-08, 0, -2.33769e-07, -1.004, -5.87, -2.33769e-07, 1.91833e-15, 0, -3, 0)
-texture = ExtResource("2_ero2m")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny3cu")
@@ -52,8 +74,10 @@ environment = SubResource("Environment_ny3cu")
 size = Vector2i(7168, 1024)
 
 [node name="Camera3D" type="Camera3D" parent="TopDownMirrors/TopMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 71, 48)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.575, 48)
 keep_aspect = 0
+projection = 1
+size = 112.0
 
 [node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/TopMirror"]
 transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, 0, -3, -64)
@@ -66,8 +90,10 @@ texture = SubResource("ViewportTexture_rfeow")
 size = Vector2i(7168, 1024)
 
 [node name="Camera3D" type="Camera3D" parent="TopDownMirrors/BottomMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 71, -48)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.575, -48)
 keep_aspect = 0
+projection = 1
+size = 112.0
 
 [node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/BottomMirror"]
 transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, 0, -3, 64)
@@ -80,7 +106,9 @@ texture = SubResource("ViewportTexture_cpxkf")
 size = Vector2i(1024, 7168)
 
 [node name="Camera3D" type="Camera3D" parent="TopDownMirrors/LeftMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24, 71, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24, 13.575, 0)
+projection = 1
+size = 112.0
 
 [node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/LeftMirror"]
 transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, -40, -3, 0)
@@ -94,7 +122,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 size = Vector2i(1024, 7168)
 
 [node name="Camera3D" type="Camera3D" parent="TopDownMirrors/RightMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -24, 71, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -24, 13.575, 0)
+projection = 1
+size = 112.0
 
 [node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/RightMirror"]
 transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, -40, -3, 0)
@@ -102,6 +132,12 @@ flip_h = true
 flip_v = true
 axis = 1
 texture = SubResource("ViewportTexture_vaxcs")
+
+[node name="TopDownSkyBox" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(-1.36817e-07, 0, 3.13, 0, 3.13, 0, -3.13, 0, -1.36817e-07, 0, -3, 0)
+axis = 1
+sprite_frames = SubResource("SpriteFrames_qie0s")
+frame_progress = 0.832703
 
 [node name="BorderArea" type="Area3D" parent="."]
 collision_layer = 15
@@ -115,6 +151,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.
 projection = 1
 size = 16.0
 
+[connection signal="camera_toggle" from="Player" to="." method="_on_player_camera_toggle"]
 [connection signal="has_died" from="Player" to="." method="_on_player_has_died"]
 [connection signal="area_exited" from="BorderArea" to="." method="_on_border_area_area_exited"]
 [connection signal="body_exited" from="BorderArea" to="." method="_on_border_area_body_exited"]
