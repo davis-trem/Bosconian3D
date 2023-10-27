@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://sogdc1rw0ou4"]
+[gd_scene load_steps=18 format=3 uid="uid://sogdc1rw0ou4"]
 
 [ext_resource type="Script" path="res://scripts/enemy_base.gd" id="1_6d7wp"]
 [ext_resource type="Shader" path="res://shaders/enemy_base_core_shield.gdshader" id="1_8oirp"]
 [ext_resource type="PackedScene" uid="uid://cmkdpup77057y" path="res://scenes/orb.tscn" id="2_pxyja"]
+[ext_resource type="PackedScene" uid="uid://brjs18jvibmdf" path="res://scenes/core.tscn" id="3_yni1v"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_svfkf"]
 height = 0.5
@@ -26,15 +27,6 @@ albedo_color = Color(0, 0.701961, 0, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_41y2n"]
 material = SubResource("StandardMaterial3D_eeuxe")
 height = 0.26
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f03ao"]
-albedo_color = Color(1, 0, 0.368627, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_vnqud"]
-material = SubResource("StandardMaterial3D_f03ao")
-top_radius = 0.45
-bottom_radius = 0.45
-height = 0.6
 
 [sub_resource type="Animation" id="Animation_251h0"]
 resource_name = "open_shields"
@@ -242,9 +234,7 @@ shape = SubResource("CylinderShape3D_s87jc")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.13)
 mesh = SubResource("CylinderMesh_41y2n")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-mesh = SubResource("CylinderMesh_vnqud")
+[node name="Core" parent="." instance=ExtResource("3_yni1v")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -3,7 +3,8 @@
 [ext_resource type="Shader" path="res://shaders/orb.gdshader" id="1_7xq6x"]
 [ext_resource type="Script" path="res://scripts/orb.gd" id="1_o2i8t"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_4tcma"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b34uw"]
+height = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oifpq"]
 render_priority = 0
@@ -27,7 +28,7 @@ collision_mask = 13
 script = ExtResource("1_o2i8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_4tcma")
+shape = SubResource("CylinderShape3D_b34uw")
 
 [node name="BodyMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

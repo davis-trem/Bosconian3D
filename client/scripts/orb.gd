@@ -4,7 +4,9 @@ const Util = preload('res://scripts/util.gd')
 
 @onready var body_mesh = $BodyMesh
 @onready var projectile = $Projectile
+@onready var collision_shape = $CollisionShape3D
 
+signal has_died
 
 var is_dead = false
 var initial_look_direction = 0
@@ -38,8 +40,13 @@ func _process(delta):
 func die():
 	if is_dead:
 		return
-	Util.explode(self)
 	is_dead = true
+	has_died.emit()
+	Util.explode(self)
 	(body_mesh.mesh as SphereMesh).is_hemisphere = true
 	(body_mesh.mesh as SphereMesh).height = (body_mesh.mesh as SphereMesh).radius
 	body_mesh.rotation.z = PI
+	(collision_shape.shape as CylinderShape3D).height = (body_mesh.mesh as SphereMesh).radius
+	collision_shape.rotation.x = PI / 2
+	collision_shape.position.z = (body_mesh.mesh as SphereMesh).radius / 2
+	
