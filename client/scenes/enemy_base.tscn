@@ -1,0 +1,360 @@
+[gd_scene load_steps=19 format=3 uid="uid://sogdc1rw0ou4"]
+
+[ext_resource type="Script" path="res://scripts/enemy_base.gd" id="1_6d7wp"]
+[ext_resource type="Shader" path="res://shaders/enemy_base_core_shield.gdshader" id="1_8oirp"]
+[ext_resource type="PackedScene" uid="uid://cmkdpup77057y" path="res://scenes/orb.tscn" id="2_pxyja"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_svfkf"]
+height = 0.5
+radius = 0.625
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2q0f"]
+render_priority = 0
+shader = ExtResource("1_8oirp")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ox1an"]
+material = SubResource("ShaderMaterial_r2q0f")
+radius = 0.625
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s87jc"]
+height = 0.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eeuxe"]
+albedo_color = Color(0, 0.701961, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_41y2n"]
+material = SubResource("StandardMaterial3D_eeuxe")
+height = 0.26
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f03ao"]
+albedo_color = Color(1, 0, 0.368627, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vnqud"]
+material = SubResource("StandardMaterial3D_f03ao")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.6
+
+[sub_resource type="Animation" id="Animation_251h0"]
+resource_name = "open_shields"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.13), Vector3(0, 0, -0.353239)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.13), Vector3(0, 0, 0.353)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.13), Vector3(0, 0, 0.353)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.13), Vector3(0, 0, -0.353)]
+}
+
+[sub_resource type="Animation" id="Animation_mbclx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.13)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0.13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -0.13)]
+}
+
+[sub_resource type="Animation" id="Animation_y3pf6"]
+resource_name = "close_shields"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.353239), Vector3(0, 0, -0.13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.353), Vector3(0, 0, 0.13)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape3D3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.353), Vector3(0, 0, 0.13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.353), Vector3(0, 0, -0.13)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dd1dy"]
+_data = {
+"RESET": SubResource("Animation_mbclx"),
+"close_shields": SubResource("Animation_y3pf6"),
+"open_shields": SubResource("Animation_251h0")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_5yvrl"]
+height = 0.9
+radius = 0.125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bd62"]
+albedo_color = Color(0, 0.701961, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_py3pw"]
+material = SubResource("StandardMaterial3D_0bd62")
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.9
+
+[node name="EnemyBase" type="StaticBody3D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_6d7wp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.5)
+shape = SubResource("CylinderShape3D_svfkf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.5)
+shape = SubResource("CylinderShape3D_svfkf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_ox1an")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.13)
+shape = SubResource("CylinderShape3D_s87jc")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.13)
+mesh = SubResource("CylinderMesh_41y2n")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.13)
+shape = SubResource("CylinderShape3D_s87jc")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.13)
+mesh = SubResource("CylinderMesh_41y2n")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_vnqud")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dd1dy")
+}
+
+[node name="Orb" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.5, 0, 0.75)
+
+[node name="Orb3" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 0, 0.75)
+
+[node name="Orb2" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 1.75)
+
+[node name="Arm" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.258819, 0.965926, -4.2222e-08, 0, -4.37114e-08, -1, -0.965926, 0.258819, -1.13133e-08, 0.758645, 0, 0.507582)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.258819, -0.965926, 4.2222e-08, 0, -4.37114e-08, -1, 0.965926, 0.258819, -1.13133e-08, -0.759, 0, 0.508)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm2"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.573576, 0.819152, -3.58063e-08, 0, -4.37114e-08, -1, -0.819152, 0.573576, -2.50718e-08, -0.769915, 0, 1.27756)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm3"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm4" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.573576, -0.819152, 3.58063e-08, 0, -4.37114e-08, -1, 0.819152, 0.573576, -2.50718e-08, 0.77, 0, 1.278)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm4"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.05423)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm5"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Orb4" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.5, 0, -0.75)
+
+[node name="Orb5" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.5, 0, -0.75)
+
+[node name="Orb6" parent="." instance=ExtResource("2_pxyja")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.75)
+
+[node name="Arm6" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.258819, -0.965926, 4.2222e-08, 0, -4.37114e-08, -1, 0.965926, -0.258819, 1.13133e-08, -0.758753, 0, -0.524026)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm6"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm7" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.258819, 0.965926, -4.2222e-08, 0, -4.37114e-08, -1, -0.965926, -0.258819, 1.13133e-08, 0.758892, 0, -0.524445)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm7"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm8" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.573576, -0.819152, 3.58063e-08, 0, -4.37114e-08, -1, 0.819152, -0.573576, 2.50718e-08, 0.769807, 0, -1.294)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm8"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm9" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.573577, 0.819152, -3.58063e-08, 0, -4.37114e-08, -1, -0.819152, -0.573577, 2.50718e-08, -0.770108, 0, -1.29444)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm9"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")
+
+[node name="Arm10" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, -0.00010811, 0, -1.07067)
+shape = SubResource("CylinderShape3D_5yvrl")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Arm10"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.88178e-16, 0, 2.88658e-15, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_py3pw")
+skeleton = NodePath("../..")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cmkdpup77057y"]
+
+[ext_resource type="Shader" path="res://shaders/orb.gdshader" id="1_7xq6x"]
+[ext_resource type="Script" path="res://scripts/orb.gd" id="1_o2i8t"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4tcma"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oifpq"]
+render_priority = 0
+shader = ExtResource("1_7xq6x")
+shader_parameter/has_died = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_ms26q"]
+resource_local_to_scene = true
+material = SubResource("ShaderMaterial_oifpq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5hdum"]
+albedo_color = Color(0.494118, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m7pv7"]
+material = SubResource("StandardMaterial3D_5hdum")
+height = 0.001
+
+[node name="Orb" type="StaticBody3D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_o2i8t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_4tcma")
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("SphereMesh_ms26q")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="RedMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_m7pv7")
+
+[node name="Projectile" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.9)
