@@ -1,15 +1,18 @@
 extends StaticBody3D
 
 const Util = preload('res://scripts/util.gd')
+const bullet_scene = preload('res://scenes/bullet.tscn')
 
 @onready var body_mesh = $BodyMesh
 @onready var projectile = $Projectile
 @onready var collision_shape = $CollisionShape3D
 
 signal has_died
+signal fired_shot
 
 var is_dead = false
 var initial_look_direction = 0
+var can_shoot = false
 
 
 func _ready():
@@ -35,6 +38,12 @@ func _process(delta):
 		initial_look_direction - PI/4,
 		initial_look_direction + PI/4
 	) #-45° to 45°
+	
+	if can_shoot and global_position.distance_to(player_pos) <= 8:
+		fired_shot.emit()
+		var bullet = bullet_scene.instantiate()
+		bullet.global_transform = projectile.global_transform
+		get_tree().current_scene.add_child(bullet)
 
 
 func die():
