@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/bullet.gd" id="1_wbpqq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_64m35"]
-radius = 0.03
-height = 0.3
+radius = 0.1
+height = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p7t6h"]
 rim = 0.74
@@ -12,7 +12,7 @@ rim_tint = 1.0
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_0ded1"]
 material = SubResource("StandardMaterial3D_p7t6h")
-radius = 0.2
+radius = 0.1
 height = 1.0
 
 [node name="Bullet" type="Area3D"]
