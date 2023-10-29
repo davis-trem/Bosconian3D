@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://pahi5cgwitot"]
+
+[ext_resource type="Script" path="res://scripts/cosmo_mine.gd" id="1_hxsnm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hl2qx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cy68p"]
+albedo_color = Color(0.34902, 0, 0.737255, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rgqa2"]
+material = SubResource("StandardMaterial3D_cy68p")
+radius = 0.35
+height = 0.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgkg0"]
+albedo_color = Color(0.92549, 0.698039, 0.109804, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f8uat"]
+material = SubResource("StandardMaterial3D_tgkg0")
+top_radius = 0.03
+bottom_radius = 0.03
+height = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_o2kff"]
+
+[node name="CosmoMine" type="StaticBody3D" groups=["obstacle"]]
+collision_layer = 4
+collision_mask = 15
+script = ExtResource("1_hxsnm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_hl2qx")
+
+[node name="Body" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Body"]
+mesh = SubResource("SphereMesh_rgqa2")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f8uat")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f8uat")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.707107, 0.707107, -3.09086e-08, 0, -4.37114e-08, -1, -0.707107, 0.707107, -3.09086e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f8uat")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(0.707107, -0.707107, 3.09086e-08, 0, -4.37114e-08, -1, 0.707107, 0.707107, -3.09086e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_f8uat")
+skeleton = NodePath("../..")
+
+[node name="ExplosionImpact" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ExplosionImpact"]
+shape = SubResource("SphereShape3D_o2kff")
+
+[connection signal="body_entered" from="ExplosionImpact" to="." method="_on_explosion_impact_body_entered"]

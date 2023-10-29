@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b65f3jryvbpyh"]
+
+[ext_resource type="Script" path="res://scripts/astroid.gd" id="1_0hngl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgmde"]
+albedo_color = Color(0.384314, 0.243137, 0.0705882, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y7jg3"]
+material = SubResource("StandardMaterial3D_jgmde")
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ch421"]
+height = 1.5
+
+[node name="Astroid" type="StaticBody3D" groups=["obstacle"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_0hngl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_y7jg3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_ch421")
