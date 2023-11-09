@@ -15,6 +15,7 @@ signal camera_toggle(is_top_down: bool)
 
 var speed = 9
 var move_direction = Vector3(0, 0, -1)
+var id
 
 
 func _ready():
@@ -54,6 +55,9 @@ func _physics_process(delta):
 	
 	var collision := move_and_collide(velocity * delta)
 	if collision:
+		var collider = collision.get_collider()
+		if collider.has_method('die'):
+			collider.die()
 		die()
 
 
@@ -90,4 +94,5 @@ func handle_cockpit_movement():
 func die():
 	has_died.emit(global_position)
 	Util.explode(self)
+	GameProgress.player_died(id)
 	queue_free()

@@ -31,7 +31,7 @@ func _on_border_area_area_exited(area):
 		area.global_position.z = -area.global_position.z
 
 
-func _on_player_has_died(position):
+func on_player_has_died(position):
 	spectador_camera.global_position = position
 	spectador_camera.current = true
 

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const Util = preload('res://scripts/util.gd')
 
-
+var points = 50
 var speed = 4
 
 
@@ -25,9 +25,15 @@ func _physics_process(delta):
 	velocity.x = direction.y * speed
 	velocity.z = direction.x * speed
 	
-	move_and_collide(velocity * delta)
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		var collider = collision.get_collider()
+		if collider.has_method('die'):
+			collider.die()
+		die()
 
 
 func die():
 	Util.explode(self)
+	GameProgress.increase_score(points)
 	queue_free()

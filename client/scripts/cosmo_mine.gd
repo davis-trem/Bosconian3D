@@ -7,6 +7,7 @@ const Util = preload('res://scripts/util.gd')
 @onready var explosion_impact_collision_shape = $ExplosionImpact/CollisionShape3D
 @onready var body = $Body
 
+var points = 20
 var explosion_should_damage = false
 
 
@@ -25,6 +26,7 @@ func die():
 	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = global_position
 	explosion.emitting = true
+	GameProgress.increase_score(points)
 
 
 func _on_explosion_finished():

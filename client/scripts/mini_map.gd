@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const Util = preload('res://scripts/util.gd')
 
@@ -30,6 +30,14 @@ func _physics_process(delta):
 			_remove_player(player)
 
 
+func draw_player(player):
+	var color_rect = ColorRect.new()
+	color_rect.size = Vector2(5, 5)
+	color_rect.position = _calculate_position(player.global_position)
+	players_color_rect[player] = color_rect
+	add_child(color_rect)
+
+
 func _remove_player(player):
 	var color_rect = players_color_rect.get(player)
 	if (color_rect != null):
@@ -39,6 +47,6 @@ func _remove_player(player):
 
 func _calculate_position(pos: Vector3) -> Vector2:
 	return Vector2(
-		(pos.x + Util.FIELD_WIDTH) / (Util.FIELD_WIDTH * 2) * 240,
-		(pos.z + Util.FIELD_HEIGHT) / (Util.FIELD_HEIGHT * 2) * 420
+		(pos.x + Util.FIELD_WIDTH) / (Util.FIELD_WIDTH * 2) * size.x,
+		(pos.z + Util.FIELD_HEIGHT) / (Util.FIELD_HEIGHT * 2) * size.y
 	)

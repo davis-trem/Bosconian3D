@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://r2633qqnjt7n"]
+[gd_scene load_steps=5 format=3 uid="uid://r2633qqnjt7n"]
 
+[ext_resource type="Script" path="res://scripts/game_play_screen.gd" id="1_7sj7k"]
 [ext_resource type="PackedScene" uid="uid://cr2sa3eocr5qo" path="res://scenes/battle_field.tscn" id="1_jne16"]
 [ext_resource type="PackedScene" uid="uid://frqby8usxaaa" path="res://scenes/mini_map.tscn" id="2_s2xjl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j6wej"]
+bg_color = Color(0.239216, 0.568627, 0, 1)
 
 [node name="GamePlayScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7sj7k")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -45,7 +50,9 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/MarginContainer"]
@@ -56,5 +63,62 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Hi-Score"
 horizontal_alignment = 1
+uppercase = true
+
+[node name="HiScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "20000"
+horizontal_alignment = 2
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Condition"
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ConditionLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_j6wej")
+text = "Green"
+horizontal_alignment = 1
+uppercase = true
 
 [node name="MiniMap" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("2_s2xjl")]
+layout_mode = 2
+
+[node name="LivesContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 11
+columns = 4
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/LivesContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/LivesContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/LivesContainer"]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="ColorRect4" type="ColorRect" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/LivesContainer"]
+visible = false
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+
+[node name="RoundLabel" type="Label" parent="HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Round 1"
+horizontal_alignment = 1

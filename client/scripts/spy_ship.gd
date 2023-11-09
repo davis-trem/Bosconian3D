@@ -4,6 +4,7 @@ const Util = preload('res://scripts/util.gd')
 
 @onready var retreat_timer = $RetreatTimer
 
+var points = 200
 var speed = 7
 
 enum {
@@ -35,7 +36,12 @@ func _physics_process(delta):
 	var direction = Vector2(-cos(rotation.y), -sin(rotation.y)).normalized()
 	velocity.x = direction.y * speed
 	velocity.z = direction.x * speed
-	move_and_collide(velocity * delta)
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		var collider = collision.get_collider()
+		if collider.has_method('die'):
+			collider.die()
+		die()
 
 
 func _on_detection_area_body_entered(body: Node3D):
@@ -62,4 +68,5 @@ func _on_retreat_timer_timeout():
 
 func die():
 	Util.explode(self)
+	GameProgress.increase_score(points)
 	queue_free()

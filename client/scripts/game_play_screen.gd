@@ -1,0 +1,21 @@
+extends Control
+
+@onready var battle_field = $HBoxContainer/SubViewportContainer/SubViewport/BattleField
+@onready var mini_map = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/MiniMap
+@onready var hi_score_label = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/HiScoreLabel
+@onready var score_label = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/ScoreLabel
+@onready var condition_label = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/ConditionLabel
+@onready var lives_container = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/LivesContainer
+@onready var round_label = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/RoundLabel
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	GameProgress.game_play_screen = self
+	GameProgress.new_game()
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass

@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const Util = preload('res://scripts/util.gd')
 
-
+var points = 60
 var speed = 8
 var radius = 5
 var randnum = randf()
@@ -24,6 +24,8 @@ func _physics_process(delta):
 		return
 	var player_pos = Util.get_closest_position(self, closest_player)
 	
+	var collision
+	
 	if global_position.distance_to(player_pos) <= radius:
 		look_at(player_pos)
 		var direction = global_position.direction_to(
@@ -32,7 +34,7 @@ func _physics_process(delta):
 		if direction != Vector3.ZERO:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
-		move_and_collide(velocity * delta)
+		collision = move_and_collide(velocity * delta)
 		time = 0.2
 		pos = global_position
 	else:
@@ -55,7 +57,13 @@ func _physics_process(delta):
 		if direction != Vector3.ZERO:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
-		move_and_collide(velocity * delta)
+		collision = move_and_collide(velocity * delta)
+	
+	if collision:
+		var collider = collision.get_collider()
+		if collider.has_method('die'):
+			collider.die()
+		die()
 
 
 func _quadratic_bezier(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
@@ -82,4 +90,5 @@ func _get_circle_position(target: Vector3) -> Vector3:
 
 func die():
 	Util.explode(self)
+	GameProgress.increase_score(points)
 	queue_free()

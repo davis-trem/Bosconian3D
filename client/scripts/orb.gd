@@ -10,6 +10,7 @@ const bullet_scene = preload('res://scenes/bullet.tscn')
 signal has_died
 signal fired_shot
 
+var points = 200
 var is_dead = false
 var initial_look_direction = 0
 var can_shoot = false
@@ -58,4 +59,5 @@ func die():
 	(collision_shape.shape as CylinderShape3D).height = (body_mesh.mesh as SphereMesh).radius
 	collision_shape.rotation.x = PI / 2
 	collision_shape.position.z = (body_mesh.mesh as SphereMesh).radius / 2
+	GameProgress.increase_score(points)
 	

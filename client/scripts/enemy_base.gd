@@ -12,6 +12,7 @@ const Util = preload('res://scripts/util.gd')
 @onready var orb_5 = $Orb5
 @onready var orb_6 = $Orb6
 
+var points = 1500
 var orbs = []
 var shooting_wait_time = 0
 var time_since_last_shoot = 0
@@ -53,4 +54,6 @@ func _on_orb_died():
 
 func _die():
 	Util.explode(self)
+	GameProgress.increase_score(points)
+	GameProgress.enemy_base_died()
 	queue_free()

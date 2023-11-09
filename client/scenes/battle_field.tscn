@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cr2sa3eocr5qo"]
+[gd_scene load_steps=18 format=3 uid="uid://cr2sa3eocr5qo"]
 
 [ext_resource type="Script" path="res://scripts/battle_field.gd" id="1_ppidl"]
-[ext_resource type="PackedScene" uid="uid://b0848qla8civx" path="res://scenes/player.tscn" id="2_l8kc8"]
 [ext_resource type="Texture2D" uid="uid://1433wc4llul3" path="res://sky_boxes/space_skybox_01.png" id="4_8hhva"]
 [ext_resource type="Texture2D" uid="uid://cvjq1e61egvjn" path="res://sky_boxes/space_skybox_02.png" id="5_5w63l"]
 [ext_resource type="PackedScene" uid="uid://sogdc1rw0ou4" path="res://scenes/enemy_base.tscn" id="6_ocx0h"]
@@ -63,8 +62,6 @@ size = Vector3(64, 50, 112)
 
 [node name="BattleField" type="Node3D"]
 script = ExtResource("1_ppidl")
-
-[node name="Player" parent="." instance=ExtResource("2_l8kc8")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny3cu")
@@ -155,7 +152,7 @@ projection = 1
 size = 16.0
 
 [node name="Astroid" parent="." instance=ExtResource("7_luxfu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.67352, 0, -8.81721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.67352, 0, -1.81721)
 
 [node name="CosmoMine" parent="." instance=ExtResource("7_h15oh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0249767, 0, -8.81721)
@@ -163,7 +160,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0249767, 0, -8.81721)
 [node name="EnemyBase" parent="." instance=ExtResource("6_ocx0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.0812, 0, -12.967)
 
-[connection signal="camera_toggle" from="Player" to="." method="_on_player_camera_toggle"]
-[connection signal="has_died" from="Player" to="." method="_on_player_has_died"]
 [connection signal="area_exited" from="BorderArea" to="." method="_on_border_area_area_exited"]
 [connection signal="body_exited" from="BorderArea" to="." method="_on_border_area_body_exited"]
