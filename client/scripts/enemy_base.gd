@@ -55,5 +55,5 @@ func _on_orb_died():
 func _die():
 	Util.explode(self)
 	GameProgress.increase_score(points)
-	GameProgress.enemy_base_died()
+	GameProgress.enemy_base_died(self)
 	queue_free()

@@ -45,6 +45,13 @@ func _remove_player(player):
 		players_color_rect.erase(player)
 
 
+func remove_base(enemy_base):
+	var color_rect = bases_color_rect.get(enemy_base)
+	if (color_rect != null):
+		color_rect.queue_free()
+		bases_color_rect.erase(enemy_base)
+
+
 func _calculate_position(pos: Vector3) -> Vector2:
 	return Vector2(
 		(pos.x + Util.FIELD_WIDTH) / (Util.FIELD_WIDTH * 2) * size.x,

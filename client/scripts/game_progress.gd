@@ -79,6 +79,7 @@ func player_died(peer_id):
 		_add_player(peer_id)
 
 
-func enemy_base_died():
+func enemy_base_died(enemy_base):
+	game_play_screen.mini_map.remove_base(enemy_base)
 	if game_play_screen.get_tree().get_nodes_in_group('enemy_base').size() == 0:
 		curr_round += 1

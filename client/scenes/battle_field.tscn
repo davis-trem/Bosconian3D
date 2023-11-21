@@ -152,7 +152,7 @@ projection = 1
 size = 16.0
 
 [node name="Astroid" parent="." instance=ExtResource("7_luxfu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.67352, 0, -1.81721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67352, 0, -1.81721)
 
 [node name="CosmoMine" parent="." instance=ExtResource("7_h15oh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0249767, 0, -8.81721)
