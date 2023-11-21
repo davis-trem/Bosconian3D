@@ -36,6 +36,16 @@ grow_vertical = 2
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HBoxContainer"]
 layout_mode = 2
 
+[node name="RespawnContainer" type="CenterContainer" parent="HBoxContainer/SubViewportContainer"]
+visible = false
+custom_minimum_size = Vector2(720, 720)
+layout_mode = 2
+
+[node name="RespawnLabel" type="Label" parent="HBoxContainer/SubViewportContainer/RespawnContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Press [FIRE] to respawn"
+
 [node name="SubViewport" type="SubViewport" parent="HBoxContainer/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(720, 720)

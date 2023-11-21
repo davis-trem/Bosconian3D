@@ -29,6 +29,14 @@ func new_game():
 	_draw_lives()
 	
 	players = {}
+	start_round()
+
+
+func start_round():
+	for player_peer_id in players.keys():
+		if players.get(player_peer_id):
+			players[player_peer_id].queue_free()
+
 	var multiplayer_unique_id = multiplayer.get_unique_id()
 	_add_player(multiplayer_unique_id)
 
@@ -75,8 +83,14 @@ func player_died(peer_id):
 	if lives == 0:
 		print('game over')
 	else:
-		await get_tree().create_timer(2.0).timeout
-		_add_player(peer_id)
+		game_play_screen.respawn_container.show()
+		game_play_screen.respawn_label.show()
+
+
+func respawn_player():
+	_add_player(local_player_multiplayer_unique_id)
+	game_play_screen.respawn_container.hide()
+	game_play_screen.respawn_label.hide()
 
 
 func enemy_base_died(enemy_base):
