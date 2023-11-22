@@ -44,3 +44,17 @@ static func explode(node: Node3D):
 	node.get_tree().current_scene.add_child(explosion)
 	explosion.global_position = node.global_position
 	explosion.emitting = true
+
+
+static func generate_spawn_point(radius: float, avoidables: Array) -> Vector3:
+	var x = randf_range((-FIELD_WIDTH / 2) + radius, (FIELD_WIDTH / 2) - radius)
+	var z = randf_range((-FIELD_WIDTH / 2) + radius, (FIELD_WIDTH / 2) - radius)
+	
+	while (-radius < x and x < radius) or avoidables.any(func (node): (
+		(node.global_position.x - radius < x and x < node.global_position.x + radius)
+		and (node.global_position.z - radius < z and z < node.global_position.z + radius)
+	)):
+		x = randf_range((-FIELD_WIDTH / 2) + radius, (FIELD_WIDTH / 2) - radius)
+		z = randf_range((-FIELD_HEIGHT / 2) + radius, (FIELD_HEIGHT / 2) - radius)
+	
+	return Vector3(x, 0, z)

@@ -5,22 +5,6 @@ const Util = preload('res://scripts/util.gd')
 var players_color_rect = {}
 var bases_color_rect = {}
 
-func _ready():
-	for player in get_tree().get_nodes_in_group('player'):
-		var color_rect = ColorRect.new()
-		color_rect.size = Vector2(5, 5)
-		color_rect.position = _calculate_position(player.global_position)
-		players_color_rect[player] = color_rect
-		add_child(color_rect)
-		
-	for base in get_tree().get_nodes_in_group('enemy_base'):
-		var color_rect = ColorRect.new()
-		color_rect.size = Vector2(10, 10)
-		color_rect.position = _calculate_position(base.global_position)
-		color_rect.color = Color.DARK_GREEN
-		bases_color_rect[base] = color_rect
-		add_child(color_rect)
-
 
 func _physics_process(delta):
 	for player in players_color_rect.keys():
@@ -38,6 +22,15 @@ func draw_player(player):
 	add_child(color_rect)
 
 
+func draw_base(enemy_base):
+	var color_rect = ColorRect.new()
+	color_rect.size = Vector2(10, 10)
+	color_rect.position = _calculate_position(enemy_base.global_position)
+	color_rect.color = Color.DARK_GREEN
+	bases_color_rect[enemy_base] = color_rect
+	add_child(color_rect)
+
+
 func _remove_player(player):
 	var color_rect = players_color_rect.get(player)
 	if (color_rect != null):
@@ -50,6 +43,14 @@ func remove_base(enemy_base):
 	if (color_rect != null):
 		color_rect.queue_free()
 		bases_color_rect.erase(enemy_base)
+
+
+func clear_map():
+	for player in players_color_rect.keys():
+		_remove_player(player)
+	
+	for base in bases_color_rect.keys():
+		remove_base(base) 
 
 
 func _calculate_position(pos: Vector3) -> Vector2:

@@ -1,6 +1,10 @@
 extends Node
 
+const astroid_scene = preload('res://scenes/astroid.tscn')
+const cosmo_mine_scene = preload('res://scenes/cosmo_mine.tscn')
+const enemy_base_scene = preload('res://scenes/enemy_base.tscn')
 const player_scene = preload('res://scenes/player.tscn')
+const Util = preload('res://scripts/util.gd')
 
 var game_play_screen: Control
 var curr_round = 1
@@ -29,16 +33,42 @@ func new_game():
 	_draw_lives()
 	
 	players = {}
-	start_round()
+	_start_round()
 
 
-func start_round():
+func _start_round():
 	for player_peer_id in players.keys():
 		if players.get(player_peer_id):
 			players[player_peer_id].queue_free()
 
 	var multiplayer_unique_id = multiplayer.get_unique_id()
 	_add_player(multiplayer_unique_id)
+	
+	_spawn_enemy_bases_and_obstacles()
+
+
+func _spawn_enemy_bases_and_obstacles():
+	var base_count = 8 if curr_round >= 3 else curr_round + 2
+	var obstacles = []
+	for i in base_count:
+		var enemy_base = enemy_base_scene.instantiate()
+		game_play_screen.battle_field.add_child(enemy_base)
+		enemy_base.global_position = Util.generate_spawn_point(3.5, obstacles)
+		game_play_screen.mini_map.draw_base(enemy_base)
+		obstacles.append(enemy_base)
+	
+	var obstacle_spawn_radius = 1
+	for i in 20:
+		var astroid = astroid_scene.instantiate()
+		game_play_screen.battle_field.add_child(astroid)
+		astroid.global_position = Util.generate_spawn_point(3.5, obstacles)
+		obstacles.append(astroid)
+	
+	for i in 10:
+		var cosmo_mine = cosmo_mine_scene.instantiate()
+		game_play_screen.battle_field.add_child(cosmo_mine)
+		cosmo_mine.global_position = Util.generate_spawn_point(3.5, obstacles)
+		obstacles.append(cosmo_mine)
 
 
 func _add_player(peer_id):
