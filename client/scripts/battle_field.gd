@@ -43,3 +43,11 @@ func _on_player_camera_toggle(is_top_down):
 	else:
 		top_down_mirrors.hide()
 		top_down_sky_box.hide()
+
+
+func empty_field():
+	for enemy in get_tree().get_nodes_in_group('enemy'):
+		enemy.queue_free()
+	
+	for obstacle in get_tree().get_nodes_in_group('obstacle'):
+		obstacle.queue_free()

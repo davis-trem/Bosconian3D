@@ -55,5 +55,5 @@ func _on_orb_died():
 func _die():
 	Util.explode(self)
 	GameProgress.increase_score(points)
-	GameProgress.enemy_base_died(self)
+	GameProgress.enemy_base_died(self, get_tree().get_nodes_in_group('enemy_base').size() == 1)
 	queue_free()

@@ -9,6 +9,8 @@ extends Control
 @onready var round_label = $HBoxContainer/VBoxContainer/MarginContainer/VBoxContainer/RoundLabel
 @onready var respawn_container = $HBoxContainer/SubViewportContainer/RespawnContainer
 @onready var respawn_label = $HBoxContainer/SubViewportContainer/RespawnContainer/RespawnLabel
+@onready var ready_container = $HBoxContainer/SubViewportContainer/ReadyContainer
+@onready var ready_label = $HBoxContainer/SubViewportContainer/ReadyContainer/ReadyLabel
 
 
 # Called when the node enters the scene tree for the first time.

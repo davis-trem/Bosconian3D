@@ -37,6 +37,9 @@ func new_game():
 
 
 func _start_round():
+	game_play_screen.ready_label.text = 'READY ROUND {0}'.format([curr_round])
+	game_play_screen.ready_container.show()
+	
 	for player_peer_id in players.keys():
 		if players.get(player_peer_id):
 			players[player_peer_id].queue_free()
@@ -45,9 +48,15 @@ func _start_round():
 	_add_player(multiplayer_unique_id)
 	
 	_spawn_enemy_bases_and_obstacles()
+	
+	get_tree().paused = true
+	await get_tree().create_timer(3.0).timeout
+	get_tree().paused = false
+	game_play_screen.ready_container.hide()
 
 
 func _spawn_enemy_bases_and_obstacles():
+	game_play_screen.battle_field.empty_field()
 	var base_count = 8 if curr_round >= 3 else curr_round + 2
 	var obstacles = []
 	for i in base_count:
@@ -63,7 +72,7 @@ func _spawn_enemy_bases_and_obstacles():
 		game_play_screen.battle_field.add_child(astroid)
 		astroid.global_position = Util.generate_spawn_point(3.5, obstacles)
 		obstacles.append(astroid)
-	
+
 	for i in 10:
 		var cosmo_mine = cosmo_mine_scene.instantiate()
 		game_play_screen.battle_field.add_child(cosmo_mine)
@@ -123,7 +132,8 @@ func respawn_player():
 	game_play_screen.respawn_label.hide()
 
 
-func enemy_base_died(enemy_base):
+func enemy_base_died(enemy_base, is_last_base = false):
 	game_play_screen.mini_map.remove_base(enemy_base)
-	if game_play_screen.get_tree().get_nodes_in_group('enemy_base').size() == 0:
+	if is_last_base:
 		curr_round += 1
+		_start_round()
