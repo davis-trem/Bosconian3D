@@ -19,6 +19,9 @@ var time_since_last_shoot = 0
 
 
 func _ready():
+	if randi_range(0, 1) == 0:
+		rotation.y = PI / 2
+	
 	core.has_died.connect(_die)
 	
 	orbs = [orb, orb_2, orb_3, orb_4, orb_5, orb_6]
