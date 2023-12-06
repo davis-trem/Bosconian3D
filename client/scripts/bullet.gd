@@ -12,8 +12,8 @@ var fired_by_player = false
 
 func _ready():
 	if not fired_by_player:
-		scale.x = 1.3
-		speed = 20
+		scale.x = 1.5
+		speed = 10
 	else:
 		set_collision_mask_value(1, false)
 
