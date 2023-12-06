@@ -5,6 +5,13 @@ const explosion_scene = preload('res://scenes/explosion.tscn')
 const FIELD_HEIGHT = 56
 const FIELD_WIDTH = 32
 
+const SPAWN_POINTS = [
+	Vector3(0, 0, FIELD_HEIGHT + 5),
+	Vector3(0, 0, -FIELD_HEIGHT - 5),
+	Vector3(FIELD_WIDTH + 5, 0, 0),
+	Vector3(-FIELD_WIDTH - 5, 0, 0),
+]
+
 static func get_mirror_border_position(node: Node3D) -> Vector3:
 	var margin = 16
 	

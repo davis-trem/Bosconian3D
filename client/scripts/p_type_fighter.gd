@@ -61,7 +61,7 @@ func _physics_process(delta):
 	
 	if collision:
 		var collider = collision.get_collider()
-		if collider.has_method('die'):
+		if collider.has_method('die') and not collider is CharacterBody3D:
 			collider.die()
 		die()
 
