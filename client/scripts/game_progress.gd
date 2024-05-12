@@ -109,6 +109,7 @@ func _add_player(peer_id):
 	if peer_id == multiplayer.get_unique_id():
 		local_player_multiplayer_unique_id = peer_id
 		player.has_died.connect(game_play_screen.battle_field.on_player_has_died)
+		player.camera_toggle.connect(game_play_screen.battle_field.on_player_camera_toggle)
 
 
 func _draw_lives():

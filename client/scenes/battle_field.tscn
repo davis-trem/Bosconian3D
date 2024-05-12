@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cr2sa3eocr5qo"]
+[gd_scene load_steps=12 format=3 uid="uid://cr2sa3eocr5qo"]
 
 [ext_resource type="Script" path="res://scripts/battle_field.gd" id="1_ppidl"]
 [ext_resource type="Texture2D" uid="uid://1433wc4llul3" path="res://sky_boxes/space_skybox_01.png" id="4_8hhva"]
 [ext_resource type="Texture2D" uid="uid://cvjq1e61egvjn" path="res://sky_boxes/space_skybox_02.png" id="5_5w63l"]
 [ext_resource type="Texture2D" uid="uid://bvkwlvy86lm8h" path="res://sky_boxes/space_skybox_03.png" id="6_ywnfq"]
 
-[sub_resource type="AnimatedTexture" id="AnimatedTexture_odaph"]
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_3b67l"]
 frames = 3
 frame_0/texture = ExtResource("4_8hhva")
 frame_1/texture = ExtResource("5_5w63l")
@@ -14,28 +14,16 @@ frame_2/texture = ExtResource("6_ywnfq")
 frame_2/duration = 1.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_aco4a"]
-panorama = SubResource("AnimatedTexture_odaph")
+panorama = SubResource("AnimatedTexture_3b67l")
 
-[sub_resource type="Sky" id="Sky_08knd"]
+[sub_resource type="Sky" id="Sky_focnx"]
 sky_material = SubResource("PanoramaSkyMaterial_aco4a")
 
 [sub_resource type="Environment" id="Environment_ny3cu"]
 background_mode = 2
-sky = SubResource("Sky_08knd")
+sky = SubResource("Sky_focnx")
 ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_rfeow"]
-viewport_path = NodePath("TopDownMirrors/TopMirror/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_cpxkf"]
-viewport_path = NodePath("TopDownMirrors/BottomMirror/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_brsg6"]
-viewport_path = NodePath("TopDownMirrors/LeftMirror/SubViewport")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_vaxcs"]
-viewport_path = NodePath("TopDownMirrors/RightMirror/SubViewport")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qie0s"]
 animations = [{
@@ -57,81 +45,17 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_emdh6"]
 size = Vector3(64, 50, 112)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqu61"]
+size = Vector3(48, 45, 96)
+
 [node name="BattleField" type="Node3D"]
 script = ExtResource("1_ppidl")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ny3cu")
 
-[node name="TopDownMirrors" type="Node3D" parent="."]
-
-[node name="TopMirror" type="Node3D" parent="TopDownMirrors"]
-
-[node name="SubViewport" type="SubViewport" parent="TopDownMirrors/TopMirror"]
-size = Vector2i(7168, 1024)
-
-[node name="Camera3D" type="Camera3D" parent="TopDownMirrors/TopMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.575, 48)
-keep_aspect = 0
-projection = 1
-size = 112.0
-
-[node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/TopMirror"]
-transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, 0, -3, -64)
-axis = 1
-texture = SubResource("ViewportTexture_rfeow")
-
-[node name="BottomMirror" type="Node3D" parent="TopDownMirrors"]
-
-[node name="SubViewport" type="SubViewport" parent="TopDownMirrors/BottomMirror"]
-size = Vector2i(7168, 1024)
-
-[node name="Camera3D" type="Camera3D" parent="TopDownMirrors/BottomMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.575, -48)
-keep_aspect = 0
-projection = 1
-size = 112.0
-
-[node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/BottomMirror"]
-transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, 0, -3, 64)
-axis = 1
-texture = SubResource("ViewportTexture_cpxkf")
-
-[node name="LeftMirror" type="Node3D" parent="TopDownMirrors"]
-
-[node name="SubViewport" type="SubViewport" parent="TopDownMirrors/LeftMirror"]
-size = Vector2i(1024, 7168)
-
-[node name="Camera3D" type="Camera3D" parent="TopDownMirrors/LeftMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24, 13.575, 0)
-projection = 1
-size = 112.0
-
-[node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/LeftMirror"]
-transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, -40, -3, 0)
-axis = 1
-texture = SubResource("ViewportTexture_brsg6")
-
-[node name="RightMirror" type="Node3D" parent="TopDownMirrors"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
-[node name="SubViewport" type="SubViewport" parent="TopDownMirrors/RightMirror"]
-size = Vector2i(1024, 7168)
-
-[node name="Camera3D" type="Camera3D" parent="TopDownMirrors/RightMirror/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -24, 13.575, 0)
-projection = 1
-size = 112.0
-
-[node name="Sprite3D" type="Sprite3D" parent="TopDownMirrors/RightMirror"]
-transform = Transform3D(1.58, 0, 0, 0, 1.58, 0, 0, 0, 1.58, -40, -3, 0)
-flip_h = true
-flip_v = true
-axis = 1
-texture = SubResource("ViewportTexture_vaxcs")
-
 [node name="TopDownSkyBox" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(-1.36817e-07, 0, 3.13, 0, 3.13, 0, -3.13, 0, -1.36817e-07, 0, -3, 0)
+transform = Transform3D(-1.36817e-07, 0, 5, 0, 3.13, 0, -3.13, 0, -2.18557e-07, 0, -3, 0)
 axis = 1
 sprite_frames = SubResource("SpriteFrames_qie0s")
 frame_progress = 0.832703
@@ -148,5 +72,16 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.
 projection = 1
 size = 16.0
 
+[node name="MirrorArea" type="Area3D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MirrorArea"]
+shape = SubResource("BoxShape3D_lqu61")
+
 [connection signal="area_exited" from="BorderArea" to="." method="_on_border_area_area_exited"]
 [connection signal="body_exited" from="BorderArea" to="." method="_on_border_area_body_exited"]
+[connection signal="area_entered" from="MirrorArea" to="." method="_on_mirror_area_area_entered"]
+[connection signal="area_exited" from="MirrorArea" to="." method="_on_mirror_area_area_exited"]
+[connection signal="body_entered" from="MirrorArea" to="." method="_on_mirror_area_body_entered"]
+[connection signal="body_exited" from="MirrorArea" to="." method="_on_mirror_area_body_exited"]
