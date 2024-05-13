@@ -1,13 +1,10 @@
-extends CharacterBody3D
-
-const Util = preload('res://scripts/util.gd')
-
-var points = 50
-var speed = 4
+extends "res://scripts/base_fighter.gd"
 
 
 func _ready():
-	velocity = Vector3(0, 0, -1 * speed)
+	super()
+	points = 50
+	speed = 4
 
 
 func _physics_process(delta):
@@ -26,14 +23,4 @@ func _physics_process(delta):
 	velocity.z = direction.x * speed
 	
 	var collision = move_and_collide(velocity * delta)
-	if collision:
-		var collider = collision.get_collider()
-		if collider.has_method('die') and not collider is CharacterBody3D:
-			collider.die()
-		die()
-
-
-func die():
-	Util.explode(self)
-	GameProgress.increase_score(points)
-	queue_free()
+	_handle_collision(collision)

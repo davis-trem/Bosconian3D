@@ -1,24 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyl30fo8vec0m"]
+[gd_scene load_steps=4 format=3 uid="uid://cj1my663fwup8"]
 
+[ext_resource type="PackedScene" uid="uid://die7i1x33tvwi" path="res://scenes/base_fighter.tscn" id="1_ohtid"]
 [ext_resource type="Script" path="res://scripts/i_type_fighter.gd" id="1_se5xw"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_45h8r"]
-
-[sub_resource type="PrismMesh" id="PrismMesh_87jp5"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_02ed5"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43j34"]
 albedo_color = Color(0.529412, 0.301961, 1, 1)
 
-[node name="ITypeFighter" type="CharacterBody3D" groups=["enemy"]]
-collision_layer = 2
-collision_mask = 5
+[node name="ITypeFighter" instance=ExtResource("1_ohtid")]
 script = ExtResource("1_se5xw")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_45h8r")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.5, 0, -1, -2.18557e-08, 0, 0, 0)
-mesh = SubResource("PrismMesh_87jp5")
-skeleton = NodePath("../CollisionShape3D")
-surface_material_override/0 = SubResource("StandardMaterial3D_02ed5")
+[node name="MeshInstance3D" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_43j34")

@@ -1,9 +1,5 @@
-extends CharacterBody3D
+extends "res://scripts/base_fighter.gd"
 
-const Util = preload('res://scripts/util.gd')
-
-var points = 60
-var speed = 8
 var radius = 5
 var randnum = randf()
 var pos = Vector3.ZERO
@@ -11,7 +7,9 @@ var flip = false
 var time := 0.0
 
 func _ready():
-	velocity = Vector3(0, 0, -1 * speed)
+	super()
+	points = 60
+	speed = 8
 	pos = global_position
 
 
@@ -59,11 +57,7 @@ func _physics_process(delta):
 			velocity.z = direction.z * speed
 		collision = move_and_collide(velocity * delta)
 	
-	if collision:
-		var collider = collision.get_collider()
-		if collider.has_method('die') and not collider is CharacterBody3D:
-			collider.die()
-		die()
+	_handle_collision(collision)
 
 
 func _quadratic_bezier(p0: Vector3, p1: Vector3, p2: Vector3, t: float) -> Vector3:
@@ -86,9 +80,3 @@ func _get_circle_position(target: Vector3) -> Vector3:
 		0,
 		circle_center.z + sin(angle) * 0.5
 	)
-
-
-func die():
-	Util.explode(self)
-	GameProgress.increase_score(points)
-	queue_free()

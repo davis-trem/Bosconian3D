@@ -20,8 +20,12 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	for key in mirrored_items.keys():
-		if key == null:
-			mirrored_items[key].queue_free()
+		if key == null: # original was killed
+			if mirrored_items[key] != null:
+				mirrored_items[key].queue_free()
+			mirrored_items.erase(key)
+		elif mirrored_items[key] == null: # copy was killed
+			key.queue_free()
 			mirrored_items.erase(key)
 		else:
 			mirrored_items[key].global_position = Util.get_mirror_border_position(key)

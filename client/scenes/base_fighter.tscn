@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://die7i1x33tvwi"]
+
+[ext_resource type="Script" path="res://scripts/base_fighter.gd" id="1_e0lxi"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gutym"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_hyqkb"]
+
+[node name="BaseFighter" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_e0lxi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gutym")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.5, 0, -1, -2.18557e-08, 0, 0, 0)
+mesh = SubResource("PrismMesh_hyqkb")
+skeleton = NodePath("../CollisionShape3D")

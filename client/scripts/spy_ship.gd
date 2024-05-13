@@ -1,11 +1,7 @@
-extends CharacterBody3D
-
-const Util = preload('res://scripts/util.gd')
+extends "res://scripts/base_fighter.gd"
 
 @onready var retreat_timer = $RetreatTimer
 
-var points = 200
-var speed = 7
 
 enum {
 	PURSUE,
@@ -17,7 +13,9 @@ var should_red_alert := false
 
 
 func _ready():
-	velocity = Vector3(0, 0, -1 * speed)
+	super()
+	points = 200
+	speed = 7
 
 
 func _physics_process(delta):
@@ -37,11 +35,7 @@ func _physics_process(delta):
 	velocity.x = direction.y * speed
 	velocity.z = direction.x * speed
 	var collision = move_and_collide(velocity * delta)
-	if collision:
-		var collider = collision.get_collider()
-		if collider.has_method('die') and not collider is CharacterBody3D:
-			collider.die()
-		die()
+	_handle_collision(collision)
 
 
 func _on_detection_area_body_entered(body: Node3D):
@@ -64,9 +58,3 @@ func _on_retreat_timer_timeout():
 		state = PURSUE
 		speed = 7
 		should_red_alert = true
-
-
-func die():
-	Util.explode(self)
-	GameProgress.increase_score(points)
-	queue_free()
