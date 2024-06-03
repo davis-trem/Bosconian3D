@@ -18,3 +18,35 @@ shape = SubResource("BoxShape3D_gutym")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 0.5, 0, -1, -2.18557e-08, 0, 0, 0)
 mesh = SubResource("PrismMesh_hyqkb")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="RayCast3DUp" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -3)
+collision_mask = 3
+
+[node name="RayCast3DUpRight" type="RayCast3D" parent="."]
+target_position = Vector3(2, 0, -2)
+collision_mask = 3
+
+[node name="RayCast3DRight" type="RayCast3D" parent="."]
+target_position = Vector3(3, 0, 0)
+collision_mask = 3
+
+[node name="RayCast3DDownRight" type="RayCast3D" parent="."]
+target_position = Vector3(2, 0, 2)
+collision_mask = 3
+
+[node name="RayCast3DDown" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 3)
+collision_mask = 3
+
+[node name="RayCast3DDownLeft" type="RayCast3D" parent="."]
+target_position = Vector3(-2, 0, 2)
+collision_mask = 3
+
+[node name="RayCast3DLeft" type="RayCast3D" parent="."]
+target_position = Vector3(-3, 0, 0)
+collision_mask = 3
+
+[node name="RayCast3DUpLeft" type="RayCast3D" parent="."]
+target_position = Vector3(-2, 0, -2)
+collision_mask = 3
