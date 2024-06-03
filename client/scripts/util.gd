@@ -4,6 +4,7 @@ const explosion_scene = preload('res://scenes/explosion.tscn')
 
 const FIELD_HEIGHT = 56
 const FIELD_WIDTH = 32
+enum  QUADRANTS { ONE, TWO, THREE, FOUR, ALL }
 
 const SPAWN_POINTS = [
 	Vector3(0, 0, FIELD_HEIGHT + 5),
@@ -54,15 +55,45 @@ static func explode(node: Node3D):
 	explosion.emitting = true
 
 
-static func generate_spawn_point(radius: float, avoidables: Array) -> Vector3:
-	var x = randf_range(-FIELD_WIDTH + radius, FIELD_WIDTH - radius)
-	var z = randf_range(-FIELD_WIDTH + radius, FIELD_WIDTH - radius)
+static func _get_random_point_in_quadrant(radius: float, quadrant: QUADRANTS) -> Array:
+	match quadrant:
+		QUADRANTS.ONE:
+			var x = randf_range(-FIELD_WIDTH + radius, radius)
+			var z = randf_range(-FIELD_HEIGHT + radius, radius)
+			return [x, z]
+		QUADRANTS.TWO:
+			var x = randf_range(radius, FIELD_WIDTH -radius)
+			var z = randf_range(-FIELD_HEIGHT + radius, radius)
+			return [x, z]
+		QUADRANTS.THREE:
+			var x = randf_range(-FIELD_WIDTH + radius, radius)
+			var z = randf_range(radius, FIELD_HEIGHT - radius)
+			return [x, z]
+		QUADRANTS.FOUR:
+			var x = randf_range(radius, FIELD_WIDTH -radius)
+			var z = randf_range(radius, FIELD_HEIGHT - radius)
+			return [x, z]
+		QUADRANTS.ALL, _:
+			var x = randf_range(-FIELD_WIDTH + radius, FIELD_WIDTH - radius)
+			var z = randf_range(-FIELD_HEIGHT + radius, FIELD_HEIGHT - radius)
+			return [x, z]
+
+
+static func generate_spawn_point(
+	radius: float,
+	avoidables: Array,
+	quadrant: QUADRANTS = QUADRANTS.ALL
+) -> Vector3:
+	var points = _get_random_point_in_quadrant(radius, quadrant)
+	var x = points[0]
+	var z = points[1]
 	
 	while (-radius < x and x < radius) or avoidables.any(func (node): (
 		(node.global_position.x - radius < x and x < node.global_position.x + radius)
 		and (node.global_position.z - radius < z and z < node.global_position.z + radius)
 	)):
-		x = randf_range(-FIELD_WIDTH + radius, FIELD_WIDTH - radius)
-		z = randf_range(-FIELD_HEIGHT + radius, FIELD_HEIGHT - radius)
+		points = _get_random_point_in_quadrant(radius, quadrant)
+		x = points[0]
+		z = points[1]
 	
 	return Vector3(x, 0, z)

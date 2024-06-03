@@ -87,13 +87,13 @@ func _spawn_enemy_bases_and_obstacles():
 	for i in 20:
 		var astroid = astroid_scene.instantiate()
 		game_play_screen.battle_field.add_child(astroid)
-		astroid.global_position = Util.generate_spawn_point(3.5, obstacles)
+		astroid.global_position = Util.generate_spawn_point(3.5, obstacles, i % 4)
 		obstacles.append(astroid)
 
 	for i in 10:
 		var cosmo_mine = cosmo_mine_scene.instantiate()
 		game_play_screen.battle_field.add_child(cosmo_mine)
-		cosmo_mine.global_position = Util.generate_spawn_point(3.5, obstacles)
+		cosmo_mine.global_position = Util.generate_spawn_point(3.5, obstacles, i % 4)
 		obstacles.append(cosmo_mine)
 
 
