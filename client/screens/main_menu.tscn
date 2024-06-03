@@ -61,6 +61,7 @@ size_flags_vertical = 3
 [node name="SinglePlayerButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+focus_neighbor_top = NodePath("../SettingsButton")
 theme_override_font_sizes/font_size = 30
 text = "Single Player"
 
@@ -69,3 +70,14 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 30
 text = "Multi Player"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+focus_neighbor_bottom = NodePath("../SinglePlayerButton")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/SinglePlayerButton" to="." method="_on_single_player_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/MultiPlayerButton" to="." method="_on_multi_player_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
