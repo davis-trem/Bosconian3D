@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameProgress="*res://scripts/game_progress.gd"
+Server="*res://scripts/server.gd"
 ParticleCache="res://scripts/particle_cache.gd"
 
 [display]

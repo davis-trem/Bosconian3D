@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgy0bkhowp54o"]
+
+[ext_resource type="Script" path="res://scripts/multiplayer_options.gd" id="1_q18uc"]
+[ext_resource type="Texture2D" uid="uid://1433wc4llul3" path="res://sky_boxes/space_skybox_01.png" id="1_yefsf"]
+[ext_resource type="Texture2D" uid="uid://cvjq1e61egvjn" path="res://sky_boxes/space_skybox_02.png" id="2_wfycb"]
+[ext_resource type="Texture2D" uid="uid://bvkwlvy86lm8h" path="res://sky_boxes/space_skybox_03.png" id="3_60yrf"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_7gj8l"]
+frames = 3
+frame_0/texture = ExtResource("1_yefsf")
+frame_1/texture = ExtResource("2_wfycb")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_60yrf")
+frame_2/duration = 1.0
+
+[node name="MultiplayerOptions" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q18uc")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1568.0
+offset_top = -664.0
+offset_right = 1568.0
+offset_bottom = 664.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_yefsf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1568.0
+offset_top = -664.0
+offset_right = 1568.0
+offset_bottom = 664.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AnimatedTexture_7gj8l")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ServerConnectionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Connecting to server..."
+
+[node name="DisplayNameLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Display name"
+max_length = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreateRoomButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Create room"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RoomIDLineEdit" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Room ID"
+
+[node name="JoinRoomButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Join Room"
+
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CreateRoomButton" to="." method="_on_create_room_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/JoinRoomButton" to="." method="_on_join_room_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
